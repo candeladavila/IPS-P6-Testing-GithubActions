@@ -34,3 +34,23 @@ jobs:
 
       - name: Ejecutar tests
         run: ./mvnw verify --no-transfer-progress
+
+      - name: Publicar reporte de tests
+        uses: ctrf-io/github-test-reporter@v1
+        if: always()
+        with:
+         report-path: './target/*-reports/*.xml'
+         github-report: true
+         integrations-config: |
+           {
+             "junit-to-ctrf": {
+               "enabled": true,
+               "action": "convert",
+               "options": {
+                 "output": "./ctrf-reports/ctrf-report.json",
+                 "toolname": "junit-to-ctrf"
+               }
+             }
+           }
+        env:
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,5 +1,20 @@
 # Practica 6
 
+## Antes de empezar
+
+### Tareas que se cumplen: 
+1. Se activa al hacer push o pull request.
+2. Descarga el código del repositorio.
+3. Configura Java.
+4. Da permisos al Maven Wrapper.
+5. Compila el proyecto.
+6. Ejecuta los tests con Maven.
+7. Genera informes de tests.
+8. Genera badges de cobertura con JaCoCo.
+9. Muestra los badges en el README.
+
+
+
 ## GitHub Actions
 
 ### BÁSICOS:
@@ -67,4 +82,30 @@ permissions:
   contents: write
   checks: write
   pull-requests: write
+```
+
+### Crear informe de los test 
+Añadir como otro step dentro del job. 
+
+Nota: Al poner if: always() implica que el informe  se va a crear siempre (aunque no pasen algunos tests)
+```yaml
+      - name: Publicar reporte de tests
+        uses: ctrf-io/github-test-reporter@v1
+        if: always()
+        with:
+          report-path: './target/*-reports/*.xml'
+          github-report: true
+          integrations-config: |
+            {
+              "junit-to-ctrf": {
+                "enabled": true,
+                "action": "convert",
+                "options": {
+                  "output": "./ctrf-reports/ctrf-report.json",
+                  "toolname": "junit-to-ctrf"
+                }
+              }
+            }
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
