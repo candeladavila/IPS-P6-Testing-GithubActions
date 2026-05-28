@@ -5,6 +5,11 @@
 A Spring Boot REST API that models a small medical records system. Built as a practice project for the **Software Maintenance and Testing** course at the University of Málaga.
 
 ---
+## Badges
+### Badge estado
+![CI](https://github.com/candeladavila/IPS-P6-Testing-GithubActions/actions/workflows/ci.yml/badge.svg)
+
+---
 
 ## Domain Model
 

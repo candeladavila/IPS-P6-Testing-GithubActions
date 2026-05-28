@@ -160,3 +160,10 @@ Añadir este step al job:
           add: '.github/badges'
           message: 'Update coverage badges'
 ```
+
+## Añadir badges al README.md
+
+### Badge de estado
+```md
+![CI](https://github.com/NOMBRE_USUARIO_GITHUB/NOMBRE_REPO_GITHUB/actions/workflows/ci.yml/badge.svg)
+```
