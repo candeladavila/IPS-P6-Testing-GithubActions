@@ -52,3 +52,19 @@ jobs:
       - name: Ejecutar tests
         run: ./mvnw verify --no-transfer-progress
 ```
+
+### Ampliar workflow para que pueda escribir los badges en el repo
+```yaml
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+permissions:
+  contents: write
+  checks: write
+  pull-requests: write
+```
