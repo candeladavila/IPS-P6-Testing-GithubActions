@@ -167,3 +167,10 @@ Añadir este step al job:
 ```md
 ![CI](https://github.com/NOMBRE_USUARIO_GITHUB/NOMBRE_REPO_GITHUB/actions/workflows/ci.yml/badge.svg)
 ```
+
+### Badge de cobertura
+```md
+![Coverage](.github/badges/jacoco.svg)
+![Branches](.github/badges/branches.svg)
+```
+

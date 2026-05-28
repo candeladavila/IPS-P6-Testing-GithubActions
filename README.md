@@ -9,6 +9,9 @@ A Spring Boot REST API that models a small medical records system. Built as a pr
 ### Badge estado
 ![CI](https://github.com/candeladavila/IPS-P6-Testing-GithubActions/actions/workflows/ci.yml/badge.svg)
 
+### Badges cobertura
+![Coverage](.github/badges/jacoco.svg)
+![Branches](.github/badges/branches.svg)
 ---
 
 ## Domain Model
