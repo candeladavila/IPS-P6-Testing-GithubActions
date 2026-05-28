@@ -110,7 +110,7 @@ Nota: Al poner if: always() implica que el informe  se va a crear siempre (aunqu
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
-### Badge de cobertura con JaCoCo
+### Generar Badge de cobertura con JaCoCo
 Nota: antes de seguir es necesario que en el fichero pom.xml está el siguiente plugin: 
 ```xml
 <plugin>
@@ -146,6 +146,17 @@ Añadir otro step dentro del job:
           generate-summary: true
 ```
 
+### Guardar los Badges dentro del repositorio
 Este paso lo que hace es generar los ficheros (badges que después añadiremos):
 - .github/badges/jacoco.svg
 - .github/badges/branches.svg
+
+Añadir este step al job: 
+```yaml
+      - name: Guardar badges en el repositorio
+        uses: EndBug/add-and-commit@v9
+        if: github.event_name == 'push'
+        with:
+          add: '.github/badges'
+          message: 'Update coverage badges'
+```
