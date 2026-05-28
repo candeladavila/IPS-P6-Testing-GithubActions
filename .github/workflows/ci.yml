@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar codigo
+        uses: actions/checkout@v4
+
+      - name: Configurar Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: maven
+
+      - name: Dar permisos a Maven Wrapper
+        run: chmod +x ./mvnw
+
+      - name: Compilar proyecto
+        run: ./mvnw compile --no-transfer-progress
+
+      - name: Ejecutar tests
+        run: ./mvnw verify --no-transfer-progress
