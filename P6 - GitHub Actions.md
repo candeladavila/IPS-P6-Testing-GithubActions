@@ -109,3 +109,43 @@ Nota: Al poner if: always() implica que el informe  se va a crear siempre (aunqu
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
+
+### Badge de cobertura con JaCoCo
+Nota: antes de seguir es necesario que en el fichero pom.xml está el siguiente plugin: 
+```xml
+<plugin>
+    <groupId>org.jacoco</groupId>
+    <artifactId>jacoco-maven-plugin</artifactId>
+    <version>0.8.11</version>
+    <executions>
+        <execution>
+            <goals>
+                <goal>prepare-agent</goal>
+            </goals>
+        </execution>
+        <execution>
+            <id>report</id>
+            <phase>verify</phase>
+            <goals>
+                <goal>report</goal>
+            </goals>
+        </execution>
+    </executions>
+</plugin>
+```
+
+Añadir otro step dentro del job: 
+```yaml
+      - name: Generar badges de cobertura
+        uses: cicirello/jacoco-badge-generator@v2
+        if: always()
+        with:
+          jacoco-csv-file: target/site/jacoco/jacoco.csv
+          badges-directory: .github/badges
+          generate-branches-badge: true
+          generate-summary: true
+```
+
+Este paso lo que hace es generar los ficheros (badges que después añadiremos):
+- .github/badges/jacoco.svg
+- .github/badges/branches.svg

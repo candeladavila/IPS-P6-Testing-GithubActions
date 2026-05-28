@@ -54,3 +54,11 @@ jobs:
            }
         env:
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Generar badges de cobertura
+        uses: cicirello/jacoco-badge-generator@v2
+        if: always()
+        with:
+          jacoco-csv-file: target/site/jacoco/jacoco.csv
+          badges-directory: .github/badges
+          generate-branches-badge: true
+          generate-summary: true
